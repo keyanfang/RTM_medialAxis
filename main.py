@@ -66,14 +66,28 @@ def read_file():
     # print(df)
     data = df.values[:,0]
     # print(data)
-    len_column = len(df)
+    length = len(df)
+    len_column = len(df.columns)
     i=0
+    j=1
+    sensor_num=0
     time=[]
-    while i< len_column:
+    sensor=[]
+    while i< length:
         time.append(df.values[i,0])
         i=i+1
-        print(i)
-    print(time)
+        # print(i)
+    # print(time)
+    while j<len_column-1:
+        n=0
+        while n<length:
+            sensor.append(df.values[n,j])
+            n=n+1
+        test_sensor(sensor)
+        print(sensor)
+        sensor.clear()
+        j=j+1
+
 
 
 

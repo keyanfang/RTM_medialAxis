@@ -32,6 +32,32 @@ time3 = [921.2907, 624.4947, 141.3588, 131.8533, 845.0695, 640.8698, 621.2738, 3
          677.0270, 331.8404, 603.5925, 376.3231, 921.2878, 386.9958, 325.4662, ]
 
 
+def get_inlet_num():
+
+    while True:
+        num = input("enter inlet number")
+        if num.isdigit():
+            num = int(num)
+            return num
+            break
+        else:
+            print("wrong input")
+            continue
+
+
+def get_sensor_num():
+
+    while True:
+        num = input("enter sensor number")
+        if num.isdigit():
+            num = int(num)
+            return num
+            break
+        else:
+            print("wrong input")
+            continue
+
+
 def test_sensor(array):
     # search the sensor on the medial axis
     approx = []
@@ -47,11 +73,6 @@ def test_sensor(array):
         print(f'sensor not on medial axis')
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi,{name}')  # Press Ctrl+F8 to toggle the breakpoint.
-
-
 def select_file():
     root = tk.Tk()
     root.withdraw()
@@ -64,42 +85,50 @@ def read_file():
     file_path = select_file()
     df = pd.read_csv(file_path, sep='\t', comment='#')
     # print(df)
-    data = df.values[:,0]
+    data = df.values[:, 0]
     # print(data)
     length = len(df)
     len_column = len(df.columns)
-    i=0
-    j=1
-    sensor_num=0
-    time=[]
-    sensor=[]
-    while i< length:
-        time.append(df.values[i,0])
-        i=i+1
+    i = 0
+    j = 1
+    time = []
+    sensor = []
+    while i < length:
+        time.append(df.values[i, 0])
+        i = i + 1
         # print(i)
     # print(time)
-    while j<len_column-1:
-        n=0
-        while n<length:
-            sensor.append(df.values[n,j])
-            n=n+1
-        test_sensor(sensor)
-        print(sensor)
-        sensor.clear()
-        j=j+1
+    while j < len_column - 1:
+        n = 0
+        while n < length:
+            if df.values[n, j] > 100000.0:
+                sensor.append(df.values[n, 0])
+                break
+            else:
+                n = n + 1
+
+        j = j + 1
+    return sensor
 
 
-
-
-
-def get_axis():
-    read_file()
+def get_array():
+    inlet = get_inlet_num()
+    sensor=get_sensor_num()
+    time_array = []
+    print(time_array)
+    i=0
+    while i < inlet:
+        ls=[]
+        time_list = read_file()
+        time_array=np.append(time_array,time_list,axis=0)
+        print(time_array)
+        i=i+1
+    time_array=time_array.reshape(-1,sensor)
+    print(time_array)
 
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     # print_hi('PyCharm')
-    # testSensor(time1)
-    # testSensor(time2)
-    # testSensor(time3)
-    get_axis()
+    # get_axis()
+    get_array()

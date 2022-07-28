@@ -62,15 +62,30 @@ def select_file():
 
 def read_file():
     file_path = select_file()
-    df = pd.read_csv(file_path)
-    data = df.loc[0].values
-    print(format(data))
+    df = pd.read_csv(file_path, sep='\t', comment='#')
+    # print(df)
+    data = df.values[:,0]
+    # print(data)
+    len_column = len(df)
+    i=0
+    time=[]
+    while i< len_column:
+        time.append(df.values[i,0])
+        i=i+1
+        print(i)
+    print(time)
+
+
+
+
+def get_axis():
+    read_file()
 
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    print_hi('PyCharm')
+    # print_hi('PyCharm')
     # testSensor(time1)
     # testSensor(time2)
     # testSensor(time3)
-    read_file()
+    get_axis()

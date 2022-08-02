@@ -124,7 +124,16 @@ def get_axis():
 def get_sensor_location(array):
     file_path = select_file()
     df = pd.read_csv(file_path, sep='\t', comment='#')
-    data=np.array(df)
-    print(data)
-    for i in array:
-        print(data[i-1])
+    return df
+    # print(df)
+
+    # data=np.array(df)
+    # print(data)
+    # df1 = df.str.split('', expand=True)
+    # print(df1)
+    # points=[]
+    # for i in array:
+    #     # print(data[i-1])
+    #     points.append(data[i-1])
+    # print(points[0][0][1])
+    # return points

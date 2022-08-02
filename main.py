@@ -12,5 +12,6 @@ import draw
 if __name__ == '__main__':
     print("hello")
     # axis_num=get_axis()
-    test=[1, 3, 4, 5, 6]
-    checkAxis.get_sensor_location(test)
+    test = [1, 3, 4, 5, 6]
+    location = checkAxis.get_sensor_location(test)
+    draw.get_attribute_x(location)

@@ -18,12 +18,12 @@ def func(x, a, b):
     return y
 
 # 拟合的坐标点
-# x0 = [2, 4, 8, 10, 24, 28, 32, 48]
-# y0 = [6.66,8.35,10.81,11.55,13.63,13.68,13.69,13.67]
-test = [1, 3, 4, 5, 6]
-location = checkAxis.get_sensor_location(test)
-x0=draw.get_attribute_x(location)
-y0=draw.get_attribute_y(location)
+x0 = [2, 4, 8, 10, 24, 28, 32, 48]
+y0 = [6.66,8.35,10.81,11.55,13.63,13.68,13.69,13.67]
+# test = [1, 3, 4, 5, 6]
+# location = checkAxis.get_sensor_location(test)
+# x0=draw.get_attribute_x(location)
+# y0=draw.get_attribute_y(location)
 
 # 拟合，可选择不同的method
 result = curve_fit(func, x0, y0,method='trf')
@@ -53,9 +53,9 @@ plt.ylim((0, round(max(y0))+2))
 
 # 拟合曲线
 plt.plot(x1, y1, "blue")
-plt.title("标题",fontsize=13)
-plt.xlabel('X（h）',fontsize=12)
-plt.ylabel('Y（%）',fontsize=12)
+plt.title("axis medial",fontsize=13)
+plt.xlabel('X（mm）',fontsize=12)
+plt.ylabel('Y（mm）',fontsize=12)
 
 # 指定点，y=9时求x
 p = round(9*b/(1-9*a),2)
